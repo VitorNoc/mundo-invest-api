@@ -16,6 +16,41 @@ O projeto simula um fluxo backend corporativo utilizado em operações financeir
 
 ---
 
+# Exemplos de Requisição
+
+## Criar Cliente
+
+```bash
+curl -X POST "http://127.0.0.1:8000/clientes" ^
+-H "Content-Type: application/json" ^
+-d "{\"cliente_nome\":\"João Silva\",\"cliente_email\":\"joao@example.com\",\"tipo_solicitacao\":\"Atualização cadastral\",\"valor_patrimonio\":250000}"
+```
+
+---
+
+## Processar Webhook
+
+```bash
+curl -X POST "http://127.0.0.1:8000/webhooks/pipefy/card-updated" ^
+-H "Content-Type: application/json" ^
+-d "{\"event_id\":\"evt_123\",\"card_id\":\"card_456\",\"cliente_email\":\"joao@example.com\",\"timestamp\":\"2026-05-18T12:00:00Z\"}"
+```
+
+---
+
+# Visão de Escalabilidade AWS
+
+O projeto foi estruturado pensando em futura escalabilidade utilizando serviços AWS como:
+
+- ECS / Fargate
+- RDS PostgreSQL
+- API Gateway
+- CloudWatch
+- SQS para processamento assíncrono
+- Lambda para eventos
+
+Essa arquitetura permitiria desacoplamento do processamento de webhooks, maior escalabilidade horizontal e monitoramento centralizado da aplicação.
+
 # Tecnologias Utilizadas
 
 - Python 3.14
