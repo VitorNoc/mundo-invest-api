@@ -75,6 +75,6 @@ def test_duplicate_event(client):
     assert second_response.status_code == 409
 
     assert (
-    second_response.json()["error"]["message"]
+    second_response.json()["detail"]
     == "Evento já processado"
 )
